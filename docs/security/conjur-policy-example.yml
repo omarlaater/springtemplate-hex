@@ -1,0 +1,25 @@
+- !policy
+  id: spring-template-starter
+  body:
+    - &variables
+      - !variable db-url
+      - !variable db-username
+      - !variable db-password
+      - !variable actuator-username
+      - !variable actuator-password
+      - !variable sonar-token
+      - !variable splunk-hec-token
+
+    - !group app-consumers
+    - !group ci-consumers
+
+    - !permit
+      role: !group app-consumers
+      privileges: [ read, execute ]
+      resources: *variables
+
+    - !permit
+      role: !group ci-consumers
+      privileges: [ read, execute ]
+      resources:
+        - !variable sonar-token

@@ -1,0 +1,14 @@
+namespace: dev
+resources:
+  - ../../base
+images:
+  - name: ghcr.io/your-org/spring-template-starter
+    newTag: dev-latest
+patches:
+  - target:
+      kind: Deployment
+      name: spring-template-starter
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
